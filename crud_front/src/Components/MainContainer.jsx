@@ -36,11 +36,36 @@ componentDidMount() {
     })
   }
 
+  deleteProduct = (id) => {
+    axios.delete(`http://localhost:3001/products/${id}`)
+    .then((response) => {
+      const productIndex = this.state.products.findIndex(x => x.id === id)
+      const deletedProducts = update(this.state.products, {$splice: [[productIndex, 1]]})
+      this.setState({products: deletedProducts})
+      console.log('set')
+    })
+    .catch((data) =>{
+      console.log(data)
+    })
+  }
+
+  updateProduct = (id, name) => {
+    axios.patch(`http://localhost:3001/products/${id}`,{name: name})
+    .then((response) => {
+      const productIndex = this.state.products.findIndex(x => x.id === id)
+      const products = update(this.state.products, {[productIndex]: {$set: response.data}})
+      this.setState({products: products})
+    })
+    .catch((data) =>{
+      console.log(data)
+    })
+  }
+
   render() {
     return (
       <div className='app-main'>
         <FormContainer createProduct={this.createProduct}/>
-        <ProductsContainer productData={ this.state.products } />
+        <ProductsContainer productData={ this.state.products } deleteProduct={ this.deleteProduct} updateProduct={ this.updateProduct}/>
       </div>
     )
   }
