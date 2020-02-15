@@ -5,12 +5,17 @@ class FormContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      product: ''
+      name: ''
     }
   }
 
   onChangetext(e) {
-    this.setState({product: e.target.value})
+    this.setState({name: e.target.value})
+  }
+
+  hundleSubmit = () => {
+    this.props.createProduct(this.state.name)
+    this.setState({name:''})
   }
 
   render(){
@@ -20,7 +25,7 @@ class FormContainer extends React.Component {
         <FormGroup controlId="formBasicText">
           <FormControl
             type="text"
-            value={this.state.products}
+            value={this.state.name}
             placeholder="Enter text"
             onChange={ e => this.onChangetext(e)}
           />
