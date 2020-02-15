@@ -1,4 +1,5 @@
 import React from 'react'
+import ProductsContainer from './ProductsContainer'
 import axios from 'axios'
 
 class MainContainer extends React.Component {
@@ -23,6 +24,7 @@ componentDidMount() {
   render() {
     return (
       <div className='app-main'>
+        <ProductsContainer productData={ this.state.products } />
       </div>
     );
   }

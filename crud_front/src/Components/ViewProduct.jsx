@@ -4,7 +4,7 @@ class ViewProduct extends React.Component {
   render() {
     return(
       <div>
-        <span>{ this.props.data.product }</span>
+        <span>{ this.props.data.name }</span>
       </div>
     )
   }
